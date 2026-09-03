@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
-    paddingTop: 60,
+    paddingTop: 20,
+    paddingBottom: 40,
   },
   header: {
     alignItems: "center",
@@ -23,5 +24,19 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     color: "#fff",
     opacity: 0.9,
+  },
+  botaoAdmin: {
+    marginBottom: 20,
+  },
+  vazio: {
+    padding: 20,
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 16,
+  },
+  vazioTexto: {
+    color: "#666",
+    marginBottom: 20,
+    textAlign: "center",
   },
 });
