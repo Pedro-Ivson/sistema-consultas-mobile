@@ -128,15 +128,26 @@ export default function Admin({
     };
 
     const partesData = dataConsulta.split("/");
-    if (partesData.length !== 3) {
+    if (
+      partesData.length !== 3 ||
+      !/^\d{2}\/\d{2}\/\d{4}$/.test(dataConsulta)
+    ) {
       mostrarAlerta("Erro", "Use a data no formato DD/MM/AAAA");
       return;
     }
 
     const [dia, mes, ano] = partesData;
-    const data = new Date(Number(ano), Number(mes) - 1, Number(dia));
+    const diaNumero = Number(dia);
+    const mesNumero = Number(mes);
+    const anoNumero = Number(ano);
+    const data = new Date(anoNumero, mesNumero - 1, diaNumero);
 
-    if (Number.isNaN(data.getTime())) {
+    if (
+      Number.isNaN(data.getTime()) ||
+      data.getFullYear() !== anoNumero ||
+      data.getMonth() !== mesNumero - 1 ||
+      data.getDate() !== diaNumero
+    ) {
       mostrarAlerta("Erro", "Data inválida. Use DD/MM/AAAA");
       return;
     }
