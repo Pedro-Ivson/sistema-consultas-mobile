@@ -25,8 +25,17 @@ export const styles = StyleSheet.create({
     color: "#fff",
     opacity: 0.9,
   },
-  botaoAdmin: {
+  papel: {
+    fontSize: 14,
+    color: "#fff",
+    opacity: 0.85,
+    marginTop: 8,
+  },
+  acoes: {
     marginBottom: 20,
+  },
+  botaoAcao: {
+    marginBottom: 10,
   },
   vazio: {
     padding: 20,
