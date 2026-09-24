@@ -43,6 +43,7 @@ export default function Admin({
 
   const [nomeMed, setNomeMed] = useState("");
   const [crmMed, setCrmMed] = useState("");
+  const [emailMed, setEmailMed] = useState("");
   const [medicos, setMedicos] = useState<Medico[]>([]);
 
   const [nomePac, setNomePac] = useState("");
@@ -81,8 +82,8 @@ export default function Admin({
   }
 
   function adicionarMedico() {
-    if (!nomeMed || !crmMed) {
-      mostrarAlerta("Erro", "Preencha nome e CRM");
+    if (!nomeMed || !crmMed || !emailMed) {
+      mostrarAlerta("Erro", "Preencha nome, CRM e email");
       return;
     }
 
@@ -95,6 +96,7 @@ export default function Admin({
       id: medicos.length + 1,
       nome: nomeMed,
       crm: crmMed,
+      email: emailMed.trim().toLowerCase(),
       especialidade: especialidades[0],
       ativo: true,
     };
@@ -105,6 +107,7 @@ export default function Admin({
 
     setNomeMed("");
     setCrmMed("");
+    setEmailMed("");
     mostrarAlerta("Sucesso", "Médico adicionado!");
   }
 
@@ -224,6 +227,14 @@ export default function Admin({
             placeholder="CRM"
             value={crmMed}
             onChangeText={setCrmMed}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Email do médico"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            value={emailMed}
+            onChangeText={setEmailMed}
           />
           <Button title="Adicionar Médico" onPress={adicionarMedico} />
 
