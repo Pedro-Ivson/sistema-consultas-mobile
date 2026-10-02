@@ -7,6 +7,10 @@ export function consultasDoUsuario(
   consultas: Consulta[],
   usuario: Usuario
 ): Consulta[] {
+  if (usuario.papel === "admin") {
+    return consultas;
+  }
+
   if (usuario.papel === "paciente") {
     return consultas.filter(
       (consulta) => consulta.paciente.email === usuario.email

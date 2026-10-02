@@ -99,7 +99,11 @@ export default function Home({ usuario, onSair, navigation }: HomeProps) {
                   ? undefined
                   : () => atualizarStatus(consulta.id, "confirmada")
               }
-              onCancelar={() => atualizarStatus(consulta.id, "cancelada")}
+              onCancelar={
+                consulta.status === "agendada"
+                  ? () => atualizarStatus(consulta.id, "cancelada")
+                  : undefined
+              }
             />
           ))
         )}

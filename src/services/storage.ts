@@ -17,7 +17,7 @@ const KEYS = {
   SESSAO: "@consultas:sessao",
 };
 
-const VERSAO_CATALOGO = "3";
+const VERSAO_CATALOGO = "4";
 
 export async function salvarEspecialidades(especialidades: Especialidade[]) {
   try {
@@ -173,11 +173,23 @@ function mesclarMedicos(atuais: Medico[], usuarios: Usuario[]): Medico[] {
 
 function mesclarUsuarios(atuais: Usuario[]): Usuario[] {
   const atuaisComLogin = atuais.map(completarLogin);
-  const emailsDemo = new Set(USUARIOS_DEMO.map((usuario) => usuario.email.toLowerCase()));
+  const idsDemo = new Set(USUARIOS_DEMO.map((usuario) => usuario.id));
   const extras = atuaisComLogin.filter(
-    (usuario) => !emailsDemo.has(usuario.email.toLowerCase())
+    (usuario) => !idsDemo.has(usuario.id)
   );
-  return [...USUARIOS_DEMO, ...extras];
+  const catalogo = USUARIOS_DEMO.map((demo) => {
+    const jaSalvo = atuaisComLogin.find((item) => item.id === demo.id);
+    if (demo.papel === "admin" && jaSalvo) {
+      return {
+        ...demo,
+        senha: jaSalvo.senha,
+        nome: jaSalvo.nome || demo.nome,
+      };
+    }
+    return demo;
+  });
+
+  return [...catalogo, ...extras];
 }
 
 export async function semearDadosIniciais() {

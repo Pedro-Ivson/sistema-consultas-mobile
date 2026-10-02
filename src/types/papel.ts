@@ -1,1 +1,1 @@
-export type Papel = "medico" | "paciente";
+export type Papel = "medico" | "paciente" | "admin";
